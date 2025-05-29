@@ -1,0 +1,58 @@
+<div class="container">
+  <section class="section">
+    <h2>Button Examples</h2>
+    <div class="button-grid">
+      <app-button>Primary Button</app-button>
+      <app-button variant="secondary">Secondary Button</app-button>
+      <app-button variant="outline">Outline Button</app-button>
+      <app-button size="sm">Small Button</app-button>
+      <app-button size="lg">Large Button</app-button>
+      <app-button [disabled]="true">Disabled Button</app-button>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Tile Examples</h2>
+    <div class="tile-grid">
+      <app-tile 
+        title="Heart Rate" 
+        subtitle="Current Status" 
+        variant="primary">
+        <div class="tile-demo-content">
+          <h1>72 BPM</h1>
+          <p>Normal range</p>
+        </div>
+      </app-tile>
+
+      <app-tile 
+        title="Blood Pressure" 
+        subtitle="Last Reading" 
+        variant="success">
+        <div class="tile-demo-content">
+          <h1>120/80</h1>
+          <p>Optimal</p>
+        </div>
+      </app-tile>
+
+      <app-tile 
+        title="Steps" 
+        subtitle="Daily Goal" 
+        variant="warning">
+        <div class="tile-demo-content">
+          <h1>8,459</h1>
+          <p>Goal: 10,000</p>
+        </div>
+      </app-tile>
+
+      <app-tile 
+        title="Alerts" 
+        subtitle="Medication Reminder" 
+        variant="danger">
+        <div class="tile-demo-content">
+          <h1>2</h1>
+          <p>Pending medications</p>
+        </div>
+      </app-tile>
+    </div>
+  </section>
+</div> 

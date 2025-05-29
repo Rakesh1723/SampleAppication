@@ -1,0 +1,9 @@
+<div class="tile" [class]="getTileClasses()" [style.height]="height">
+  <div class="tile-header" *ngIf="title || subtitle">
+    <h3 class="tile-title">{{title}}</h3>
+    <p class="tile-subtitle" *ngIf="subtitle">{{subtitle}}</p>
+  </div>
+  <div class="tile-content">
+    <ng-content></ng-content>
+  </div>
+</div> 

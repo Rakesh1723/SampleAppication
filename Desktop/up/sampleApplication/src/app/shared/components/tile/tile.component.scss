@@ -1,0 +1,53 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.tile {
+  @include tile-base;
+
+  &-header {
+    margin-bottom: $spacing-md;
+  }
+
+  &-title {
+    font-size: $font-size-lg;
+    font-weight: 600;
+    color: $text-primary;
+    margin: 0;
+  }
+
+  &-subtitle {
+    font-size: $font-size-sm;
+    color: $text-secondary;
+    margin: $spacing-xs 0 0 0;
+  }
+
+  &-content {
+    flex: 1;
+  }
+
+  // Variants
+  &-primary {
+    border-left: 4px solid $primary;
+  }
+
+  &-success {
+    border-left: 4px solid $success;
+  }
+
+  &-warning {
+    border-left: 4px solid $warning;
+  }
+
+  &-danger {
+    border-left: 4px solid $danger;
+  }
+
+  // Sizes
+  &-sm {
+    padding: $spacing-md;
+  }
+
+  &-lg {
+    padding: $spacing-xl;
+  }
+} 
