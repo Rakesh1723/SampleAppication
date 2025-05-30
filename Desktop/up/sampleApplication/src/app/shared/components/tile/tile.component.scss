@@ -1,8 +1,11 @@
-@import '../../styles/variables';
-@import '../../styles/mixins';
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
 
 .tile {
   @include tile-base;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 
   &-header {
     margin-bottom: $spacing-md;

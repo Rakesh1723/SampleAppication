@@ -1,14 +1,38 @@
-
-
 <div class="app-container">
-  <header class="app-header">
+    <header class="app-header">
     <h1>{{title}}</h1>
   </header>
-  <main>
-    <app-components-demo></app-components-demo>
+  
+  <main class="container">
+    <div class="actions">
+      <button class="open-modal-btn" (click)="openModal()">Open Modal</button>
+    </div>
+
+    <div class="tiles-grid">
+      <!-- Primary Tile -->
+      <app-tile
+        title="Primary Tile"
+        subtitle="This is a primary tile example"
+        variant="primary">
+        <p>This is the content of the primary tile. You can put any content here.</p>
+      </app-tile>
+    </div>
+
+
+    <app-modal
+      *ngIf="isModalOpen"
+      [title]="'Example Modal'"
+      [primaryButtonText]="'Save Changes'"
+      [secondaryButtonText]="'Cancel'"
+      (close)="closeModal()"
+      (primaryAction)="onSave()"
+      (secondaryAction)="closeModal()">
+      <div class="modal-content-example">
+        <p>This is an example of the reusable modal component.</p>
+        <p>You can put any content here using ng-content.</p>
+      </div>
+    </app-modal>
+
+    <router-outlet />
   </main>
 </div>
-
-
-
-<router-outlet />
