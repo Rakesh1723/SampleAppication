@@ -1,9 +1,25 @@
-<div class="tile" [class]="getTileClasses()" [style.height]="height">
-  <div class="tile-header" *ngIf="title || subtitle">
-    <h3 class="tile-title">{{title}}</h3>
-    <p class="tile-subtitle" *ngIf="subtitle">{{subtitle}}</p>
+<div class="tile" 
+     [ngClass]="{'tile-active': isActive}"
+     (mousedown)="onMouseDown()"
+     (mouseleave)="onMouseLeave()">
+  <div class="tile-header">
+    <h3 class="tile-title">{{ title }}</h3>
+    <div class="status-badge">{{ status }}</div>
   </div>
   <div class="tile-content">
-    <ng-content></ng-content>
+    <div class="field-group">
+      <div class="field">
+        <span class="field-label">{{ field1Label }}</span>
+        <span class="field-value">{{ field1Value }}</span>
+      </div>
+      <div class="field">
+        <span class="field-label">{{ field2Label }}</span>
+        <span class="field-value">{{ field2Value }}</span>
+      </div>
+      <div class="field">
+        <span class="field-label">{{ field3Label }}</span>
+        <span class="field-value">{{ field3Value }}</span>
+      </div>
+    </div>
   </div>
 </div> 

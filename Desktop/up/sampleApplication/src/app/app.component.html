@@ -9,15 +9,41 @@
     </div>
 
     <div class="tiles-grid">
-      <!-- Primary Tile -->
       <app-tile
-        title="Primary Tile"
-        subtitle="This is a primary tile example"
-        variant="primary">
-        <p>This is the content of the primary tile. You can put any content here.</p>
+        title="Project Alpha"
+        status="Active"
+        field1Label="Tasks"
+        field1Value="24"
+        field2Label="Progress"
+        field2Value="75%"
+        field3Label="Due Date"
+        field3Value="Mar 15">
       </app-tile>
-    </div>
 
+      <app-tile
+        title="Project Beta"
+        status="In Review"
+        field1Label="Tasks"
+        field1Value="18"
+        field2Label="Progress"
+        field2Value="45%"
+        field3Label="Due Date"
+        field3Value="Apr 01">
+      </app-tile>
+
+      <app-tile
+        title="Project Beta"
+        status="In Review"
+        field1Label="Tasks"
+        field1Value="18"
+        field2Label="Progress"
+        field2Value="45%"
+        field3Label="Due Date"
+        field3Value="Apr 01">
+      </app-tile>
+
+      
+    </div>
 
     <app-modal
       *ngIf="isModalOpen"
