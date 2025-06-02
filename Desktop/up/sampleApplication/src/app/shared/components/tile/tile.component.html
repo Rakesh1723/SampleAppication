@@ -1,10 +1,12 @@
 <div class="tile" 
      [ngClass]="{'tile-active': isActive}"
      (mousedown)="onMouseDown()"
+     (mouseenter)="onMouseEnter()"
      (mouseleave)="onMouseLeave()">
   <div class="tile-header">
     <h3 class="tile-title">{{ title }}</h3>
-    <div class="status-badge">{{ status }}</div>
+    <div class="status-badge">{{ status1 }}</div>
+    <div class="status-badge">{{ status2 }}</div>
   </div>
   <div class="tile-content">
     <div class="field-group">

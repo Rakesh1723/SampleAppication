@@ -10,7 +10,8 @@ import { CommonModule } from '@angular/common';
 })
 export class TileComponent {
   @Input() title: string = '';
-  @Input() status: string = '';
+  @Input() status1: string = '';
+  @Input() status2: string = '';
   @Input() field1Label: string = '';
   @Input() field1Value: string = '';
   @Input() field2Label: string = '';
@@ -24,8 +25,8 @@ export class TileComponent {
     this.isActive = true;
   }
 
-  onMouseUp() {
-    // Remove this method as we don't want to deactivate on mouse up
+  onMouseEnter() {
+    this.isActive = true;
   }
 
   onMouseLeave() {

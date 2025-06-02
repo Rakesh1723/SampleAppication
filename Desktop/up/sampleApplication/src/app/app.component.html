@@ -11,7 +11,8 @@
     <div class="tiles-grid">
       <app-tile
         title="Project Alpha"
-        status="Active"
+        status1="Active"
+        status2="DeActive"
         field1Label="Tasks"
         field1Value="24"
         field2Label="Progress"
@@ -22,7 +23,8 @@
 
       <app-tile
         title="Project Beta"
-        status="In Review"
+        status1="Active"
+        status2="DeActive"
         field1Label="Tasks"
         field1Value="18"
         field2Label="Progress"
@@ -33,7 +35,8 @@
 
       <app-tile
         title="Project Beta"
-        status="In Review"
+        status1="Active"
+        status2="DeActive"
         field1Label="Tasks"
         field1Value="18"
         field2Label="Progress"
@@ -43,6 +46,36 @@
       </app-tile>
 
       
+    </div>
+
+    <div class="container">
+      <div class="dropdown-examples">
+        <h2>Dropdown Examples</h2>
+        
+        <div class="dropdown-row">
+          <div class="dropdown-section">
+            <h3>Single Select Dropdown</h3>
+            <app-dropdown
+              [options]="singleSelectOptions"
+              [isMultiSelect]="false"
+              [label]="'Select a Fruit'"
+              [placeholder]="'Choose a fruit'"
+              (selectionChange)="onSingleSelectChange($event)">
+            </app-dropdown>
+          </div>
+
+          <div class="dropdown-section">
+            <h3>Multi Select Dropdown</h3>
+            <app-dropdown
+              [options]="multiSelectOptions"
+              [isMultiSelect]="true"
+              [label]="'Select Colors'"
+              [placeholder]="'Choose colors'"
+              (selectionChange)="onMultiSelectChange($event)">
+            </app-dropdown>
+          </div>
+        </div>
+      </div>
     </div>
 
     <app-modal
