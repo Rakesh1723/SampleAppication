@@ -12,6 +12,7 @@ export class ModalComponent {
   @Input() title: string = '';
   @Input() primaryButtonText: string = 'Confirm';
   @Input() secondaryButtonText: string = 'Cancel';
+  @Input() showCloseButton: boolean = true;
 
   @Output() close = new EventEmitter<void>();
   @Output() primaryAction = new EventEmitter<void>();

@@ -1,27 +1,26 @@
-<div class="tile" 
-     [ngClass]="{'tile-active': isActive}"
-     (mousedown)="onMouseDown()"
-     (mouseenter)="onMouseEnter()"
-     (mouseleave)="onMouseLeave()">
-  <div class="tile-header">
-    <h3 class="tile-title">{{ title }}</h3>
-    <div class="status-badge">{{ status1 }}</div>
-    <div class="status-badge">{{ status2 }}</div>
-  </div>
-  <div class="tile-content">
-    <div class="field-group">
-      <div class="field">
-        <span class="field-label">{{ field1Label }}</span>
-        <span class="field-value">{{ field1Value }}</span>
-      </div>
-      <div class="field">
-        <span class="field-label">{{ field2Label }}</span>
-        <span class="field-value">{{ field2Value }}</span>
-      </div>
-      <div class="field">
-        <span class="field-label">{{ field3Label }}</span>
-        <span class="field-value">{{ field3Value }}</span>
-      </div>
-    </div>
-  </div>
-</div> 
+<mat-card class="tile" [ngClass]="{'tile-active': isActive, 'tile-disabled': isDisabled}" (mouseenter)="onMouseEnter()"
+    (mouseleave)="onMouseLeave()">
+    <mat-card-header class="tile-header">
+        <mat-card-title>{{ title }}</mat-card-title>
+        <div class="badge-container">
+            <mat-chip *ngIf="hasFiles" class="status-badge">{{ files }}</mat-chip>
+            <mat-chip *ngIf="hasTypes" class="status-badge">{{ types }}</mat-chip>
+        </div>
+    </mat-card-header>
+    <mat-card-content class="tile-content">
+        <div class="field-group">
+            <div class="field">
+                <span class="field-label">{{ field1Label }}</span>
+                <span class="field-value">{{ field1Value }}</span>
+            </div>
+            <div class="field">
+                <span class="field-label">{{ field2Label }}</span>
+                <span class="field-value">{{ field2Value }}</span>
+            </div>
+            <div class="field">
+                <span class="field-label">{{ field3Label }}</span>
+                <span class="field-value">{{ field3Value }}</span>
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>

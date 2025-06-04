@@ -1,4 +1,4 @@
-<div class="app-container">
+<!-- <div class="app-container">
     <header class="app-header">
     <h1>{{title}}</h1>
   </header>
@@ -94,4 +94,37 @@
 
     <router-outlet />
   </main>
+</div> -->
+<div class="app-container">
+
+  <header class="app-header">
+    <div class="actions">
+      <button class="open-modal-btn" (click)="openModal()">LogOut</button>
+    </div>
+    <app-modal *ngIf="isModalOpen" [title]="'Confirm Logout ?'" [primaryButtonText]="'Log off'"
+      [secondaryButtonText]="'Cancel'" [showCloseButton]="true" (close)="closeModal()" (primaryAction)="onSave()"
+      (secondaryAction)="closeModal()">
+      <div class="modal-content-example">
+        <p>Are you sure you want to logout ?</p>
+      </div>
+    </app-modal>
+  </header>
+
+  <main class="container">
+    <div class="tiles-grid">
+      <app-tile title="Enrollment" [hasFiles]="true" files=" 1 Files" [hasTypes]="false"
+        types="Types" field1Label="Total Transactions" field1Value="85K" field2Label="Successful Transactions"
+        field2Value="75k" field3Label="Fallouts" field3Value="15">
+      </app-tile>
+      <app-tile title="Correspondance Extract" [hasFiles]="false" files=" 0 Files" [hasTypes]="true"
+        types="Types" field1Label="Total Transactions" field1Value="50k" field2Label="Successful Transactions"
+        field2Value="45k" field3Label="Fallouts" field3Value="01">
+      </app-tile>
+      <app-tile [isDisabled]="true" title="Correspondance Update" [hasFiles]="true" files="0 Files"
+        [hasTypes]="true" types="Types" field1Label="Total Transactions" field1Value="47k"
+        field2Label="Successful Transactions" field2Value="45k" field3Label="Fallouts" field3Value=" 01">
+      </app-tile>
+    </div>
+  </main>
+
 </div>
