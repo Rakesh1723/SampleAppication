@@ -1,24 +1,29 @@
 <mat-card class="card" [ngClass]="{'card-active': isActive, 'card-disabled': isDisabled}" (mouseenter)="onMouseEnter()"
     (mouseleave)="onMouseLeave()">
-    <div class="card-grid">
-        <div class="header">
-            <h2 class="title">{{ title }}</h2>
-            <div class="badge-container">
-                <mat-chip *ngIf="hasFiles" class="status-badge">{{ files }}</mat-chip>
-                <mat-chip *ngIf="hasTypes" class="status-badge">{{ types }}</mat-chip>
+    <div class="card-container">
+        <div class="card-grid">
+            <div class="header">
+                <h2 class="title">{{ title }}</h2>
+                <div class="badge-container">
+                    <mat-chip *ngIf="hasFiles" class="status-badge">{{ files }}</mat-chip>
+                    <mat-chip *ngIf="hasTypes" class="status-badge">{{ types }}</mat-chip>
+                </div>
+            </div>
+            <div class="field field-1">
+                <span class="field-label">{{ field1Label }}</span>
+                <span class="field-value">{{ field1Value }}</span>
+            </div>
+            <div class="field field-2">
+                <span class="field-label">{{ field2Label }}</span>
+                <span class="field-value">{{ field2Value }}</span>
+            </div>
+            <div class="field field-3">
+                <span class="field-label">{{ field3Label }}</span>
+                <span class="field-value">{{ field3Value }}</span>
             </div>
         </div>
-        <div class="field field-1">
-            <span class="field-label">{{ field1Label }}</span>
-            <span class="field-value">{{ field1Value }}</span>
-        </div>
-        <div class="field field-2">
-            <span class="field-label">{{ field2Label }}</span>
-            <span class="field-value">{{ field2Value }}</span>
-        </div>
-        <div class="field field-3">
-            <span class="field-label">{{ field3Label }}</span>
-            <span class="field-value">{{ field3Value }}</span>
+        <div class="chart-container">
+            <canvas #donutChart></canvas>
         </div>
     </div>
 </mat-card> 

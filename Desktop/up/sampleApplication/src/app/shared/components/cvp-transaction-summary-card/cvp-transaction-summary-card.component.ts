@@ -1,7 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
+import { Chart } from 'chart.js/auto';
 
 @Component({
   selector: 'app-cvp-transaction-summary-card',
@@ -10,7 +11,7 @@ import { MatChipsModule } from '@angular/material/chips';
   templateUrl: './cvp-transaction-summary-card.component.html',
   styleUrls: ['./cvp-transaction-summary-card.component.scss']
 })
-export class CvpTransactionSummaryCardComponent {
+export class CvpTransactionSummaryCardComponent implements OnInit {
   @Input() isDisabled = false;
   @Input() title: string = '';
   @Input() hasFiles: boolean = true;
@@ -23,8 +24,51 @@ export class CvpTransactionSummaryCardComponent {
   @Input() field2Value: string = '';
   @Input() field3Label: string = '';
   @Input() field3Value: string = '';
+  @Input() chartValue1: number = 60;
+  @Input() chartValue2: number = 40;
+
+  @ViewChild('donutChart') donutChart!: ElementRef;
+  private chart: any;
 
   isActive: boolean = false;
+
+  ngOnInit() {
+    setTimeout(() => {
+      this.createChart();
+    });
+  }
+
+  createChart() {
+    const ctx = this.donutChart.nativeElement.getContext('2d');
+    
+    this.chart = new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        datasets: [{
+          data: [this.chartValue1, this.chartValue2],
+          backgroundColor: ['#00D6B8', '#F91E05'],
+          borderWidth: 0,
+          spacing: 0
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            enabled: false
+          }
+        },
+        animation: {
+          duration: 0
+        },
+        cutout: '80%'
+      }
+    });
+  }
 
   onMouseEnter() {
     if (this.isDisabled) return;
