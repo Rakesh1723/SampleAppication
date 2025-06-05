@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { TileComponent } from './shared/components/tile/tile.component';
+import { CvpTransactionSummaryCardComponent } from './shared/components/cvp-transaction-summary-card/cvp-transaction-summary-card.component';
 import { DropdownComponent } from './shared/components/dropdown/dropdown.component';
 import { CvpPrimaryButtonComponent } from './shared/components/cvp-primary-button/cvp-primary-button.component';
 import { CvpSecondaryButtonComponent } from './shared/components/cvp-secondary-button/cvp-secondary-button.component';
@@ -16,7 +16,7 @@ import { MatDialog } from '@angular/material/dialog';
   imports: [
     CommonModule,
     FormsModule,
-    TileComponent,
+    CvpTransactionSummaryCardComponent,
     CvpPrimaryButtonComponent,
     CvpSecondaryButtonComponent,
     CvpConfirmationDialogComponent

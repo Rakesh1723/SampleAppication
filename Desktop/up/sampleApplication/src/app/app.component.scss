@@ -116,20 +116,40 @@
 }
 
 .app-header {
+  background-color: #ffffff;
   padding: $spacing-md $spacing-xl;
   margin-bottom: $spacing-lg;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 
   .actions {
-      margin-bottom: $spacing-xl;
-      float: right;
-  }
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+    justify-content: flex-end;
+    padding: $spacing-md 0;
 
-  .open-modal-btn {
+    .open-modal-btn {
       padding: 10px 20px;
       background-color: #000305;
       color: white;
       border: none;
       font-size: 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+
+      &:hover {
+        background-color: #1a1f25;
+      }
+
+      &.logout2 {
+        background-color: #1a1f25;
+        
+        &:hover {
+          background-color: #2a3441;
+        }
+      }
+    }
   }
 }
 
@@ -141,7 +161,15 @@
 
 .tiles-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: $spacing-lg;
   margin-bottom: $spacing-xl;
+  
+  @media (max-width: 1200px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
 }
