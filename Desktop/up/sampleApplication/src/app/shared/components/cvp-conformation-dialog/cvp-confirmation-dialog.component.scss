@@ -1,0 +1,94 @@
+@use "../../styles/variables" as *;
+
+:host {
+  display: block;
+}
+
+.close-button {
+  position: absolute;
+  top: 0.75rem;
+  right: 1.5rem;
+  height: 2rem;
+  width: 2rem;
+  padding: 0;
+  border: none;
+  background: none;
+  color: $text-color-pot-black;
+  font-size: 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+::ng-deep {
+  .mat-mdc-dialog-container {
+    --mdc-dialog-container-color: #{$color-white};
+    --mdc-dialog-container-shape: 0;
+  }
+
+  .mat-mdc-dialog-surface {
+    width: 40.625rem !important;
+    min-width: 18.75rem !important;
+  }
+
+  h2.mat-mdc-dialog-title {
+    color: $text-color-pot-black !important;
+    font-size: $font-size-xl !important;
+    font-weight: 500 !important;
+    line-height: 1.5rem !important;
+    margin: 0 !important;
+    padding: 1.5rem 4rem 0.25rem 1.5rem !important;
+    min-height: 3rem !important;
+    display: flex !important;
+    align-items: flex-start !important;
+    box-sizing: border-box !important;
+    position: relative !important;
+  }
+
+  .mat-mdc-dialog-content {
+    color: $text-color-pot-black !important;
+    font-size: $font-size-base !important;
+    line-height: 1.5 !important;
+    padding: 0 1.5rem 2.5rem 1.5rem !important;
+    margin: 0 !important;
+
+    .logout-content {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 1.5rem;
+
+      .logout-icon {
+        width: 4rem;
+        height: 4rem;
+        object-fit: contain;
+        flex-shrink: 0;
+      }
+
+      p {
+        margin: 0;
+        text-align: left;
+        flex-grow: 1;
+      }
+    }
+
+    // For content without image (default centered)
+    > p {
+      margin: 0;
+      text-align: center;
+    }
+  }
+
+  .mat-mdc-dialog-actions {
+    padding: 0 1.5rem 1.5rem 1.5rem !important;
+    gap: $spacing-md !important;
+
+    app-cvp-primary-button,
+    app-cvp-secondary-button {
+      button {
+        width: auto;
+        min-width: 6.25rem;
+      }
+    }
+  }
+} 

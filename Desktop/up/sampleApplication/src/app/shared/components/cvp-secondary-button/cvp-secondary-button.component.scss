@@ -1,0 +1,36 @@
+@use "../../styles/variables" as *;
+
+.secondary-button {
+  padding: $spacing-sm-plus $spacing-md-plus;
+  background-color: $color-white;
+  color: $text-color-pot-black;
+  border: 0.0625rem solid $color-nordic;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover:not(:disabled) {
+    background-color: #04636D;
+    color: $text-color-snow-white;
+  }
+
+  &:disabled {
+    background-color: #c7c6c6;
+    border: none;
+    color: $text-color-pot-black;
+  }
+
+  .button-content {
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-sm;
+
+    .material-icons {
+      font-size: $font-size-base;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+    }
+  }
+}

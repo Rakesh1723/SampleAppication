@@ -1,0 +1,34 @@
+@use "../../styles/variables" as *;
+
+.primary-button {
+  padding: $spacing-sm-plus $spacing-md-plus;
+  background-color: $color-nordic;
+  color: $color-white;
+  border: 0.0625rem solid $color-nordic;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover:not(:disabled) {
+    background-color: #04636D;
+  }
+
+  &:disabled {
+    background-color: #c7c6c6;
+    border: none;
+  }
+  
+  .button-content {
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-sm;
+
+    .material-icons {
+      font-size: $font-size-base;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+    }
+  }
+}

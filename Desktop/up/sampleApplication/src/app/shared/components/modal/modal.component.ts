@@ -1,12 +1,14 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { CvpPrimaryButtonComponent } from '../cvp-primary-button/cvp-primary-button.component';
+import { CvpSecondaryButtonComponent } from '../cvp-secondary-button/cvp-secondary-button.component';
 
 @Component({
   selector: 'app-modal',
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.scss'],
   standalone: true,
-  imports: [CommonModule]
+  imports: [CommonModule, CvpPrimaryButtonComponent, CvpSecondaryButtonComponent]
 })
 export class ModalComponent {
   @Input() title: string = '';

@@ -1,12 +1,11 @@
 @use '../../styles/variables' as *;
-@use '../../styles/mixins' as *;
 @use '@angular/material' as mat;
 
 :host {
   display: block;
 }
 
-.tile {
+.card {
   background-color: $color-white;
   height: 120px;
   user-select: none;
@@ -16,7 +15,7 @@
   display: flex;
   flex-direction: column;
 
-  &.tile-active {
+  &.card-active {
     background-color: $color-nordic;
 
     ::ng-deep .mat-mdc-card-title {
@@ -35,12 +34,12 @@
     }
   }
 
-  &.tile-disabled {
+  &.card-disabled {
     opacity: 0.5;
     filter: grayscale(100%);
   }
 
-  .tile-header {
+  .card-header {
     display: flex;
     align-items: center;
     gap: $spacing-sm;
@@ -102,7 +101,7 @@
   }
 }
 
-.tile-content {
+.card-content {
   padding: 0 !important;
   flex: 1;
 

@@ -96,18 +96,24 @@
   </main>
 </div> -->
 <div class="app-container">
-
+  
   <header class="app-header">
     <div class="actions">
+      <cvp-primary-button
+        label="Primary Action"
+        icon="close"
+        [isDisabled]="isPrimaryDisabled"
+        (buttonClick)="onPrimaryAction()"
+      ></cvp-primary-button>
+      <cvp-secondary-button
+        label="Secondary Action"
+        icon="close"
+        [isDisabled]="isSecondaryDisabled"
+        (buttonClick)="onSecondaryAction()"
+      ></cvp-secondary-button>
       <button class="open-modal-btn" (click)="openModal()">LogOut</button>
+      <button class="open-modal-btn logout2" (click)="openLogout2Modal()">LogOut2</button>
     </div>
-    <app-modal *ngIf="isModalOpen" [title]="'Confirm Logout ?'" [primaryButtonText]="'Log off'"
-      [secondaryButtonText]="'Cancel'" [showCloseButton]="true" (close)="closeModal()" (primaryAction)="onSave()"
-      (secondaryAction)="closeModal()">
-      <div class="modal-content-example">
-        <p>Are you sure you want to logout ?</p>
-      </div>
-    </app-modal>
   </header>
 
   <main class="container">

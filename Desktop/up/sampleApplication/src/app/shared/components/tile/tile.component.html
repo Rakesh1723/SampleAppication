@@ -1,13 +1,13 @@
-<mat-card class="tile" [ngClass]="{'tile-active': isActive, 'tile-disabled': isDisabled}" (mouseenter)="onMouseEnter()"
+<mat-card class="card" [ngClass]="{'card-active': isActive, 'card-disabled': isDisabled}" (mouseenter)="onMouseEnter()"
     (mouseleave)="onMouseLeave()">
-    <mat-card-header class="tile-header">
+    <mat-card-header class="card-header">
         <mat-card-title>{{ title }}</mat-card-title>
         <div class="badge-container">
             <mat-chip *ngIf="hasFiles" class="status-badge">{{ files }}</mat-chip>
             <mat-chip *ngIf="hasTypes" class="status-badge">{{ types }}</mat-chip>
         </div>
     </mat-card-header>
-    <mat-card-content class="tile-content">
+    <mat-card-content class="card-content">
         <div class="field-group">
             <div class="field">
                 <span class="field-label">{{ field1Label }}</span>
