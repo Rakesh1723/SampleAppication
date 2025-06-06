@@ -9,7 +9,7 @@ import { takeUntil, filter } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class SessionService {
-  private readonly INACTIVITY_TIMEOUT = 1 * 60 * 1000; // 1 minute in milliseconds (for testing)
+  private readonly INACTIVITY_TIMEOUT = 0.5 * 10 * 1000; // 1 minute in milliseconds (for testing)
   private readonly WARNING_DURATION = 60 * 1000; // 60 seconds in milliseconds
   private activityTimer: Subscription | null = null;
   private warningTimer: Subscription | null = null;
@@ -96,7 +96,7 @@ export class SessionService {
     const dialogRef = this.dialog.open(CvpConfirmationDialogComponent, {
       data: {
         title: 'Session Timeout Warning',
-        message: `You're being timed out due to inactivity. Please choose Extend Session to stay otherwise you will be logged-off automatically in 60 sec`,
+        countdownTime: 60,
         confirmButtonText: 'Extend Session',
         cancelButtonText: 'Log Off',
         showCloseButton: false
@@ -115,13 +115,14 @@ export class SessionService {
         const currentTime = this.timeLeft.value - 1;
         this.timeLeft.next(currentTime);
         
-        if (currentTime <= 0) {
+        if (currentTime < 0) {
           this.warningTimer?.unsubscribe();
           dialogRef.close(false); // Force close with "log off" result
+          return;
         }
 
-        // Update the dialog message with the countdown
-        dialogRef.componentInstance.message = `You're being timed out due to inactivity. Please choose Extend Session to stay otherwise you will be logged-off automatically in ${currentTime} sec`;
+        // Update the countdown in the dialog component
+        dialogRef.componentInstance.updateCountdown(currentTime);
       });
 
     dialogRef.afterClosed().subscribe(result => {

@@ -1,8 +1,9 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CvpPrimaryButtonComponent } from '../cvp-primary-button/cvp-primary-button.component';
 import { CvpSecondaryButtonComponent } from '../cvp-secondary-button/cvp-secondary-button.component';
+import { BehaviorSubject } from 'rxjs';
 
 interface DialogData {
   title: string;
@@ -10,6 +11,7 @@ interface DialogData {
   confirmButtonText: string;
   cancelButtonText: string;
   showCloseButton: boolean;
+  countdownTime?: number;
 }
 
 @Component({
@@ -22,7 +24,8 @@ interface DialogData {
     MatDialogModule,
     CvpPrimaryButtonComponent,
     CvpSecondaryButtonComponent
-  ]
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CvpConfirmationDialogComponent {
   title: string;
@@ -30,15 +33,11 @@ export class CvpConfirmationDialogComponent {
   confirmButtonText: string;
   cancelButtonText: string;
   showCloseButton: boolean;
+  countdownTime?: number;
+  countdown$ = new BehaviorSubject<number>(0);
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) private data: {
-      title: string;
-      message: string;
-      confirmButtonText: string;
-      cancelButtonText: string;
-      showCloseButton?: boolean;
-    },
+    @Inject(MAT_DIALOG_DATA) private data: DialogData,
     public dialogRef: MatDialogRef<CvpConfirmationDialogComponent>
   ) {
     this.title = data.title;
@@ -46,9 +45,18 @@ export class CvpConfirmationDialogComponent {
     this.confirmButtonText = data.confirmButtonText || 'Yes';
     this.cancelButtonText = data.cancelButtonText || 'No';
     this.showCloseButton = data.showCloseButton ?? true;
+    this.countdownTime = data.countdownTime;
+    
+    if (this.countdownTime) {
+      this.countdown$.next(this.countdownTime);
+    }
 
     // Prevent dialog from closing when clicking outside
     this.dialogRef.disableClose = true;
+  }
+
+  updateCountdown(time: number) {
+    this.countdown$.next(time);
   }
 }
 
