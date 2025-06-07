@@ -1,29 +1,43 @@
 <mat-card class="card" [ngClass]="{'card-active': isActive, 'card-disabled': isDisabled}" (mouseenter)="onMouseEnter()"
     (mouseleave)="onMouseLeave()">
-    <div class="card-container">
-        <div class="card-grid">
-            <div class="header">
-                <h2 class="title">{{ title }}</h2>
-                <div class="badge-container">
-                    <mat-chip *ngIf="hasFiles" class="status-badge">{{ files }}</mat-chip>
-                    <mat-chip *ngIf="hasTypes" class="status-badge">{{ types }}</mat-chip>
+    <div class="container-fluid p-3">
+        <div class="row">
+            <!-- Left Section (9 columns) -->
+            <div class="col-9">
+                <div class="content-wrapper">
+                    <!-- Title and Badges Section -->
+                    <div class="header mb-3">
+                        <div class="title-section">
+                            <h2 class="title">{{ title }}</h2>
+                            <ng-container *ngIf="hasFiles || hasTypes">
+                                <span *ngIf="hasFiles" class="status-badge">{{ files }}</span>
+                                <span *ngIf="hasTypes" class="status-badge">{{ types }}</span>
+                            </ng-container>
+                        </div>
+                    </div>
+                    <!-- Fields Section in one line -->
+                    <div class="fields-row d-flex gap-3">
+                        <div class="field flex-1">
+                            <span class="field-label d-block">{{ field1Label }}</span>
+                            <span class="field-value d-block">{{ field1Value }}</span>
+                        </div>
+                        <div class="field flex-1">
+                            <span class="field-label d-block">{{ field2Label }}</span>
+                            <span class="field-value d-block">{{ field2Value }}</span>
+                        </div>
+                        <div class="field flex-1 field-red">
+                            <span class="field-label d-block">{{ field3Label }}</span>
+                            <span class="field-value d-block">{{ field3Value }}</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="field field-1">
-                <span class="field-label">{{ field1Label }}</span>
-                <span class="field-value">{{ field1Value }}</span>
+            <!-- Right Section (3 columns) -->
+            <div class="col-3">
+                <div class="chart-wrapper h-100 d-flex align-items-center justify-content-center">
+                    <canvas #donutChart></canvas>
+                </div>
             </div>
-            <div class="field field-2">
-                <span class="field-label">{{ field2Label }}</span>
-                <span class="field-value">{{ field2Value }}</span>
-            </div>
-            <div class="field field-3">
-                <span class="field-label">{{ field3Label }}</span>
-                <span class="field-value">{{ field3Value }}</span>
-            </div>
-        </div>
-        <div class="chart-container">
-            <canvas #donutChart></canvas>
         </div>
     </div>
 </mat-card> 

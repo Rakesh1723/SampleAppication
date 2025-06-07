@@ -1,17 +1,19 @@
-import { Component, Input, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, Input, AfterViewInit, ElementRef, ViewChild, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
-import { MatChipsModule } from '@angular/material/chips';
 import { Chart } from 'chart.js/auto';
 
 @Component({
   selector: 'app-cvp-transaction-summary-card',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatChipsModule],
+  imports: [
+    CommonModule,
+    MatCardModule
+  ],
   templateUrl: './cvp-transaction-summary-card.component.html',
   styleUrls: ['./cvp-transaction-summary-card.component.scss']
 })
-export class CvpTransactionSummaryCardComponent implements OnInit {
+export class CvpTransactionSummaryCardComponent implements AfterViewInit, OnDestroy {
   @Input() isDisabled = false;
   @Input() title: string = '';
   @Input() hasFiles: boolean = true;
@@ -28,17 +30,23 @@ export class CvpTransactionSummaryCardComponent implements OnInit {
   @Input() chartValue2: number = 40;
 
   @ViewChild('donutChart') donutChart!: ElementRef;
-  private chart: any;
+  private chart: Chart | undefined;
 
   isActive: boolean = false;
 
-  ngOnInit() {
-    setTimeout(() => {
-      this.createChart();
-    });
+  ngAfterViewInit() {
+    this.createChart();
   }
 
-  createChart() {
+  ngOnDestroy() {
+    if (this.chart) {
+      this.chart.destroy();
+    }
+  }
+
+  private createChart() {
+    if (!this.donutChart?.nativeElement) return;
+
     const ctx = this.donutChart.nativeElement.getContext('2d');
     
     this.chart = new Chart(ctx, {
@@ -65,7 +73,7 @@ export class CvpTransactionSummaryCardComponent implements OnInit {
         animation: {
           duration: 0
         },
-        cutout: '80%'
+        cutout: '75%'
       }
     });
   }

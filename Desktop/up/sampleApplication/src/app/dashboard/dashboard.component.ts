@@ -42,7 +42,7 @@ import { Router } from '@angular/router';
       </header>
 
       <main class="container">
-        <div class="tiles-grid">
+        <div class="cards-grid">
           <app-cvp-transaction-summary-card 
             title="Enrollment" 
             [hasFiles]="true" 
@@ -137,19 +137,24 @@ import { Router } from '@angular/router';
       padding: 2rem;
       max-width: 1200px;
       margin: 0 auto;
+      width: 100%;
     }
 
-    .tiles-grid {
+    .cards-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-      margin-bottom: 2rem;
-      
-      @media (max-width: 1200px) {
+      gap: 1rem;
+      width: 100%;
+    }
+
+    @media (max-width: 1199px) {
+      .cards-grid {
         grid-template-columns: repeat(2, 1fr);
       }
-      
-      @media (max-width: 768px) {
+    }
+
+    @media (max-width: 767px) {
+      .cards-grid {
         grid-template-columns: 1fr;
       }
     }

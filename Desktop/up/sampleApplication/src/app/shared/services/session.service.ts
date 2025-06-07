@@ -9,7 +9,7 @@ import { takeUntil, filter } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class SessionService {
-  private readonly INACTIVITY_TIMEOUT = 0.5 * 10 * 1000; // 1 minute in milliseconds (for testing)
+  private readonly INACTIVITY_TIMEOUT = 1 * 60 * 1000; // 1 minute in milliseconds (for testing)
   private readonly WARNING_DURATION = 60 * 1000; // 60 seconds in milliseconds
   private activityTimer: Subscription | null = null;
   private warningTimer: Subscription | null = null;
