@@ -30,6 +30,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   isSecondaryDisabled = true;
   selectedDate: Date | null = null;
   showDatePicker = false;
+  selectedLabel: string = '';
 
   constructor(
     private dialog: MatDialog,
@@ -114,8 +115,33 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   onDateSelected(date: Date): void {
     this.selectedDate = date;
+    this.selectedLabel = this.getSelectedLabel(date);
     this.showDatePicker = false;
     console.log('Selected date:', date);
+  }
+
+  getSelectedLabel(date: Date): string {
+    const today = new Date();
+    const yesterday = new Date(today);
+    yesterday.setDate(yesterday.getDate() - 1);
+    const startOfWeek = new Date(today);
+    startOfWeek.setDate(today.getDate() - today.getDay());
+    const endOfWeek = new Date(startOfWeek);
+    endOfWeek.setDate(startOfWeek.getDate() + 6);
+    const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+    const endOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+
+    if (date.toDateString() === today.toDateString()) {
+      return 'Today';
+    } else if (date.toDateString() === yesterday.toDateString()) {
+      return 'Yesterday';
+    } else if (date >= startOfWeek && date <= endOfWeek) {
+      return 'This Week';
+    } else if (date >= startOfMonth && date <= endOfMonth) {
+      return 'This Month';
+    } else {
+      return 'Custom Range';
+    }
   }
 
   onDatePickerCancel(): void {

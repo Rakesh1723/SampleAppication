@@ -1,18 +1,11 @@
 <div class="app-container">
   <header class="app-header">
     <div class="actions">
-      <div class="date-picker-wrapper">
-        <button class="date-picker-trigger" (click)="toggleDatePicker()">
-          <i class="material-icons">calendar_today</i>
-          {{ selectedDate ? (selectedDate | date:'mediumDate') : 'Select Date' }}
-        </button>
-        <cvp-date-picker
-          *ngIf="showDatePicker"
-          [(selectedDate)]="selectedDate"
-          (dateSelected)="onDateSelected($event)"
-          (cancel)="onDatePickerCancel()">
-        </cvp-date-picker>
-      </div>
+      <cvp-date-picker
+        [(selectedDate)]="selectedDate"
+        (dateSelected)="onDateSelected($event)"
+        (cancel)="onDatePickerCancel()">
+      </cvp-date-picker>
       <cvp-primary-button
         label="Primary Action"
         icon="close"
