@@ -1,0 +1,24 @@
+<div class="dropdown-container">
+  <label *ngIf="label" class="dropdown-label">{{ label }}</label>
+  <div class="dropdown-select" (click)="toggleDropdown()">
+    <span class="selected-text">{{ getDisplayText() }}</span>
+    <span class="dropdown-arrow" [class.open]="isOpen">▼</span>
+  </div>
+  <div class="dropdown-options" *ngIf="isOpen">
+    <div 
+      *ngFor="let option of options" 
+      class="dropdown-option"
+      (click)="toggleOption(option)">
+      <div class="option-content">
+        <input 
+          *ngIf="isMultiSelect"
+          type="checkbox"
+          [checked]="option.selected"
+          class="checkbox"
+          (click)="$event.stopPropagation()">
+        <span class="option-label">{{ option.label }}</span>
+      </div>
+      <span *ngIf="!isMultiSelect && option.selected" class="check-mark">✓</span>
+    </div>
+  </div>
+</div> 

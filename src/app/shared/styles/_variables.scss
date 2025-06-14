@@ -1,0 +1,91 @@
+// font sizes
+$font-size-xs: 0.75rem;    // 12px
+$font-size-sm: 0.875rem;   // 14px
+$font-size-base: 1rem;     // 16px
+$font-size-lg: 1.125rem;   // 18px
+$font-size-xl: 1.25rem;    // 20px
+$font-size-2xl: 1.5rem;    // 24px
+$font-size-3xl: 1.75rem;   // 28px
+$font-size-4xl: 2rem;      // 32px
+$font-size-5xl: 2.25rem;   // 36px
+$font-size-6xl: 2.625rem;  // 42px
+$font-size-7xl: 3rem;      // 48px
+$font-size-8xl: 3.375rem;  // 54px
+
+// colors
+
+$color-nordic: #002E33;
+$color-aqua-marine: #00D6B8;
+$color-white: #FFFFFF;
+$color-aqua-obscura: #fefefe;
+$color-fountain-blue: #56BAB9;
+$color-aero-blue: #CCF7ED;
+$color-mint-cream: #F2FBF9;
+$color-dawn: #F2ECE8;
+
+// text colors
+
+$text-color-pot-black: #161617;
+$text-color-snow-white: #FAFAFC;
+
+// status colors
+
+$status-green: #01B27C;
+$status-orange: #FC6A59;
+$status-yellow: #FFBB00;
+$status-dark-yellow: #F99602;
+
+// greys
+
+$color-very-dark-grey: #404040;
+$color-dark-grey: #707070;
+$color-medium-grey: #A8A8A8;
+$color-soft-grey: #D1D1D1;
+$color-light-gray: #F5F5F5;
+
+// background
+
+$background-bg-grey: #ECECE5;
+$background-sand: #FCF7EE;
+$background-bg-grey-50: #F6F6F2;
+$background-bg-sand-50: #FCF9F4;
+
+// extended
+
+$extended-cobalt-blue: #0072C3;
+$extended-majestic-purple: #8A3FFC;
+$extended-crimson-maroon: #9F1853;
+$extended-verdant-green: #3FA24F;
+$extended-amber-yellow: #FFD700;
+$success: #10b981;
+$warning: #f59e0b;
+$danger: #ef4444;
+$primary: #3b82f6;
+
+// Spacing
+$spacing-xs: 0.25rem;
+$spacing-xs-plus: 0.625rem; // 10px - between xs and sm
+$spacing-sm: 0.5rem;
+$spacing-sm-plus: 0.75rem;  // 12px
+$spacing-md: 1rem;
+$spacing-md-plus: 1.25rem;  // 20px
+$spacing-lg: 1.5rem;
+$spacing-xl: 2rem;
+$spacing-icon: 0.625rem; // 10px - spacing between icon and text
+
+// Border radius
+$border-radius: 0.375rem;
+$border-radius-lg: 0.5rem;
+
+// Shadows
+$shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+// Transitions
+$transition-base: all 0.2s ease-in-out;
+
+//text
+$text-primary: #1a1a1a;
+$text-secondary: #6b7280;
+

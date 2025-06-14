@@ -1,0 +1,164 @@
+<!-- <div class="app-container">
+    <header class="app-header">
+    <h1>{{title}}</h1>
+  </header>
+  
+  <main class="container">
+    <div class="actions">
+      <button class="open-modal-btn" (click)="openModal()">Open Modal</button>
+    </div>
+
+    <div class="tiles-grid">
+      <app-tile
+        title="Project Alpha"
+        status1="Active"
+        status2="DeActive"
+        field1Label="Tasks"
+        field1Value="24"
+        field2Label="Progress"
+        field2Value="75%"
+        field3Label="Due Date"
+        field3Value="Mar 15">
+      </app-tile>
+
+      <app-tile
+        title="Project Beta"
+        status1="Active"
+        status2="DeActive"
+        field1Label="Tasks"
+        field1Value="18"
+        field2Label="Progress"
+        field2Value="45%"
+        field3Label="Due Date"
+        field3Value="Apr 01">
+      </app-tile>
+
+      <app-tile
+        title="Project Beta"
+        status1="Active"
+        status2="DeActive"
+        field1Label="Tasks"
+        field1Value="18"
+        field2Label="Progress"
+        field2Value="45%"
+        field3Label="Due Date"
+        field3Value="Apr 01">
+      </app-tile>
+
+      
+    </div>
+
+    <div class="container">
+      <div class="dropdown-examples">
+        <h2>Dropdown Examples</h2>
+        
+        <div class="dropdown-row">
+          <div class="dropdown-section">
+            <h3>Single Select Dropdown</h3>
+            <app-dropdown
+              [options]="singleSelectOptions"
+              [isMultiSelect]="false"
+              [label]="'Select a Fruit'"
+              [placeholder]="'Choose a fruit'"
+              (selectionChange)="onSingleSelectChange($event)">
+            </app-dropdown>
+          </div>
+
+          <div class="dropdown-section">
+            <h3>Multi Select Dropdown</h3>
+            <app-dropdown
+              [options]="multiSelectOptions"
+              [isMultiSelect]="true"
+              [label]="'Select Colors'"
+              [placeholder]="'Choose colors'"
+              (selectionChange)="onMultiSelectChange($event)">
+            </app-dropdown>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <app-modal
+      *ngIf="isModalOpen"
+      [title]="'Example Modal'"
+      [primaryButtonText]="'Save Changes'"
+      [secondaryButtonText]="'Cancel'"
+      (close)="closeModal()"
+      (primaryAction)="onSave()"
+      (secondaryAction)="closeModal()">
+      <div class="modal-content-example">
+        <p>This is an example of the reusable modal component.</p>
+        <p>You can put any content here using ng-content.</p>
+      </div>
+    </app-modal>
+
+    <router-outlet />
+  </main>
+</div> -->
+<div class="app-container">
+  <header class="app-header">
+    <div class="actions">
+      <cvp-primary-button
+        label="Primary Action"
+        icon="close"
+        [isDisabled]="isPrimaryDisabled"
+        (buttonClick)="onPrimaryAction()"
+      ></cvp-primary-button>
+      <cvp-secondary-button
+        label="Secondary Action"
+        icon="close"
+        [isDisabled]="isSecondaryDisabled"
+        (buttonClick)="onSecondaryAction()"
+      ></cvp-secondary-button>
+      <button class="open-modal-btn" (click)="openModal()">LogOut</button>
+      <button class="open-modal-btn logout2" (click)="openLogout2Modal()">LogOut2</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="tiles-grid">
+      <app-cvp-transaction-summary-card 
+        title="Enrollment" 
+        [hasFiles]="true" 
+        files=" 1 Files" 
+        [hasTypes]="false"
+        types="Types" 
+        field1Label="Total Transactions" 
+        field1Value="85K" 
+        field2Label="Successful Transactions"
+        field2Value="75k" 
+        field3Label="Fallouts" 
+        field3Value="15">
+      </app-cvp-transaction-summary-card>
+      
+      <app-cvp-transaction-summary-card 
+        title="Correspondance Extract" 
+        [hasFiles]="false" 
+        files=" 0 Files" 
+        [hasTypes]="true"
+        types="Types" 
+        field1Label="Total Transactions" 
+        field1Value="50k" 
+        field2Label="Successful Transactions"
+        field2Value="45k" 
+        field3Label="Fallouts" 
+        field3Value="01">
+      </app-cvp-transaction-summary-card>
+      
+      <app-cvp-transaction-summary-card 
+        [isDisabled]="true" 
+        title="Correspondance Update" 
+        [hasFiles]="true" 
+        files="0 Files"
+        [hasTypes]="true" 
+        types="12000Types" 
+        field1Label="Total Transactions" 
+        field1Value="47k"
+        field2Label="Successful Transactions" 
+        field2Value="45k" 
+        field3Label="Fallouts" 
+        field3Value=" 01">
+      </app-cvp-transaction-summary-card>
+    </div>
+  </main>
+</div>

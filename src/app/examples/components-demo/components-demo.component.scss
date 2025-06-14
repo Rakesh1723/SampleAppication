@@ -1,0 +1,44 @@
+@import '../../shared/styles/variables';
+
+.container {
+  padding: $spacing-xl;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section {
+  margin-bottom: $spacing-xl;
+
+  h2 {
+    margin-bottom: $spacing-lg;
+    color: $text-primary;
+  }
+}
+
+.button-grid {
+  display: flex;
+  gap: $spacing-md;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.tile-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: $spacing-lg;
+}
+
+.tile-demo-content {
+  text-align: center;
+
+  h1 {
+    font-size: $font-size-xl;
+    color: $text-primary;
+    margin: 0;
+  }
+
+  p {
+    color: $text-secondary;
+    margin: $spacing-xs 0 0 0;
+  }
+} 

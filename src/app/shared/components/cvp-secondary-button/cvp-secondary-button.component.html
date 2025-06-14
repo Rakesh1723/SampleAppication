@@ -1,0 +1,11 @@
+<button
+  [type]="type"
+  class="secondary-button"
+  [disabled]="isDisabled"
+  (click)="onClick()"
+>
+  <span class="button-content">
+    {{ label }}
+    <span *ngIf="icon" class="material-icons">{{ icon }}</span>
+  </span>
+</button>

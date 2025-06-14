@@ -1,0 +1,79 @@
+<div class="app-container">
+  <header class="app-header">
+    <div class="actions">
+      <div class="date-picker-wrapper">
+        <button class="date-picker-trigger" (click)="toggleDatePicker()">
+          <i class="material-icons">calendar_today</i>
+          {{ selectedDate ? (selectedDate | date:'mediumDate') : 'Select Date' }}
+        </button>
+        <cvp-date-picker
+          *ngIf="showDatePicker"
+          [(selectedDate)]="selectedDate"
+          (dateSelected)="onDateSelected($event)"
+          (cancel)="onDatePickerCancel()">
+        </cvp-date-picker>
+      </div>
+      <cvp-primary-button
+        label="Primary Action"
+        icon="close"
+        [isDisabled]="isPrimaryDisabled"
+        (buttonClick)="onPrimaryAction()"
+      ></cvp-primary-button>
+      <cvp-secondary-button
+        label="Secondary Action"
+        icon="close"
+        [isDisabled]="isSecondaryDisabled"
+        (buttonClick)="onSecondaryAction()"
+      ></cvp-secondary-button>
+      <button class="open-modal-btn" (click)="openModal()">LogOut</button>
+      <button class="open-modal-btn logout2" (click)="openLogout2Modal()">LogOut2</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="cards-grid">
+      <app-cvp-transaction-summary-card 
+        title="Enrollment" 
+        [hasFiles]="true" 
+        files=" 1 Files" 
+        [hasTypes]="false"
+        types="Types" 
+        field1Label="Total Transactions" 
+        field1Value="85K" 
+        field2Label="Successful Transactions"
+        field2Value="75k" 
+        field3Label="Fallouts" 
+        field3Value="15">
+      </app-cvp-transaction-summary-card>
+      
+      <app-cvp-transaction-summary-card 
+        title="Correspondance Extract" 
+        [hasFiles]="false" 
+        files=" 0 Files" 
+        [hasTypes]="true"
+        types="Types" 
+        field1Label="Total Transactions" 
+        field1Value="50k" 
+        field2Label="Successful Transactions"
+        field2Value="45k" 
+        field3Label="Fallouts" 
+        field3Value="01">
+      </app-cvp-transaction-summary-card>
+      
+      <app-cvp-transaction-summary-card 
+        [isDisabled]="true" 
+        title="Correspondance Update" 
+        [hasFiles]="true" 
+        files="14000 Files"
+        [hasTypes]="true" 
+        types="12000 Types" 
+        field1Label="Total Transactions" 
+        field1Value="47k"
+        field2Label="Successful Transactions" 
+        field2Value="45k" 
+        field3Label="Fallouts" 
+        field3Value=" 01">
+      </app-cvp-transaction-summary-card>
+    </div>
+  </main>
+</div> 

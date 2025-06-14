@@ -1,0 +1,36 @@
+<div class="confirmation-dialog">
+  <h2 mat-dialog-title>{{ title }}
+    <button *ngIf="showCloseButton" mat-icon-button class="close-button" [mat-dialog-close]="false">
+      <span>&times;</span>
+    </button>
+  </h2>
+
+  <mat-dialog-content>
+    <ng-container *ngIf="!countdownTime">
+      <div [innerHTML]="message"></div>
+    </ng-container>
+    <ng-container *ngIf="countdownTime">
+      <div class="logout-content">
+        <img src="assets/images/warning.png" alt="Warning" class="logout-icon">
+        <div class="timeout-message">
+          <p>You're being timed out due to inactivity.</p>
+          <p>Please choose Extend Session to stay otherwise you will be logged-off automatically in 
+            <span class="countdown">{{ countdown$ | async }}</span> sec
+          </p>
+        </div>
+      </div>
+    </ng-container>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <cvp-secondary-button
+      [label]="cancelButtonText"
+      (buttonClick)="dialogRef.close(false)"
+    ></cvp-secondary-button>
+    <cvp-primary-button
+      [label]="confirmButtonText"
+      (buttonClick)="dialogRef.close(true)"
+      cdkFocusInitial
+    ></cvp-primary-button>
+  </mat-dialog-actions>
+</div> 

@@ -1,0 +1,43 @@
+<mat-card class="card" [ngClass]="{'card-active': isActive, 'card-disabled': isDisabled}" (mouseenter)="onMouseEnter()"
+    (mouseleave)="onMouseLeave()">
+    <div class="container-fluid px-3 py-3 pe-2">
+        <div class="row">
+            <!-- Left Section (9 columns) -->
+            <div class="col-9">
+                <div class="content-wrapper">
+                    <!-- Title and Badges Section -->
+                    <div class="header mb-3">
+                        <div class="title-section">
+                            <h2 class="title">{{ title }}</h2>
+                            <ng-container *ngIf="hasFiles || hasTypes">
+                                <span *ngIf="hasFiles" class="status-badge">{{ files }}</span>
+                                <span *ngIf="hasTypes" class="status-badge">{{ types }}</span>
+                            </ng-container>
+                        </div>
+                    </div>
+                    <!-- Fields Section in one line -->
+                    <div class="fields-row d-flex gap-3">
+                        <div class="field flex-1">
+                            <span class="field-label d-block">{{ field1Label }}</span>
+                            <span class="field-value d-block">{{ field1Value }}</span>
+                        </div>
+                        <div class="field flex-1">
+                            <span class="field-label d-block">{{ field2Label }}</span>
+                            <span class="field-value d-block">{{ field2Value }}</span>
+                        </div>
+                        <div class="field flex-1 field-red">
+                            <span class="field-label d-block">{{ field3Label }}</span>
+                            <span class="field-value d-block">{{ field3Value }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Right Section (3 columns) -->
+            <div class="col-3">
+                <div class="chart-wrapper h-100 d-flex align-items-center justify-content-center">
+                    <canvas #donutChart></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</mat-card> 

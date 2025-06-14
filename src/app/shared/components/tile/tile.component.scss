@@ -1,0 +1,141 @@
+@use '../../styles/variables' as *;
+@use '@angular/material' as mat;
+
+:host {
+  display: block;
+}
+
+.card {
+  background-color: $color-white;
+  height: 120px;
+  user-select: none;
+  padding: $spacing-md;
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+
+  &.card-active {
+    background-color: $color-nordic;
+
+    ::ng-deep .mat-mdc-card-title {
+      color: $color-white !important;
+    }
+
+    .field-group {
+      .field {
+        &:not(:nth-child(3)) {
+          .field-label,
+          .field-value {
+            color: $color-white;
+          }
+        }
+      }
+    }
+  }
+
+  &.card-disabled {
+    opacity: 0.5;
+    filter: grayscale(100%);
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    margin-bottom: $spacing-md;
+    padding: 0;
+
+    ::ng-deep {
+      .mat-mdc-card-header-text {
+        margin: 0;
+      }
+    }
+
+    .mat-mdc-card-title {
+      font-size: $font-size-lg;
+      font-weight: 600;
+      color: $text-primary;
+      margin: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .badge-container {
+      display: flex;
+      gap: $spacing-sm;
+      align-items: center;
+    }
+
+    ::ng-deep {
+      .status-badge {
+        --mdc-chip-container-height: auto;
+        --mdc-chip-elevated-container-elevation: none;
+        --mdc-chip-elevated-container-shape: 999px;
+        background: $color-aqua-marine;
+        border: 1px solid $color-aqua-marine;
+        padding: 2px 8px;
+        height: 20px;
+        min-height: unset;
+        font-size: $font-size-sm;
+        font-weight: 500;
+        color: $text-primary;
+        line-height: 16px;
+
+        .mdc-evolution-chip__action--primary {
+          padding: 0;
+        }
+
+        .mat-mdc-chip-action-label {
+          padding: 0;
+        }
+
+        &::before,
+        &::after,
+        .mdc-evolution-chip__background {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+.card-content {
+  padding: 0 !important;
+  flex: 1;
+
+  .field-group {
+    display: flex;
+    gap: $spacing-md;
+    height: 100%;
+    margin-right: $spacing-lg;
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+
+    &:nth-child(3) {
+      .field-label,
+      .field-value {
+        color: red;
+      }
+    }
+
+    .field-label {
+      font-size: $font-size-xs;
+      color: $text-secondary;
+      margin-bottom: $spacing-xs;
+      font-weight: 500;
+    }
+
+    .field-value {
+      font-size: $font-size-xs;
+      color: $text-primary;
+      font-weight: 600;
+    }
+  }
+}

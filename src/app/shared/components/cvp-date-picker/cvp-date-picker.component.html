@@ -1,0 +1,46 @@
+<div class="date-picker-container">
+  <div class="date-picker-header">
+    <div class="month-year">
+      {{ currentMonthName }} {{ currentYear }}
+    </div>
+    <div class="navigation">
+      <button class="nav-btn" (click)="previousMonth()">
+        <i class="material-icons">chevron_left</i>
+      </button>
+      <button class="nav-btn" (click)="nextMonth()">
+        <i class="material-icons">chevron_right</i>
+      </button>
+    </div>
+  </div>
+
+  <div class="date-picker-content">
+    <div class="left-panel">
+      <button class="option-btn" (click)="selectToday()">Today</button>
+      <button class="option-btn" (click)="selectThisWeek()">This Week</button>
+      <button class="option-btn" (click)="selectThisMonth()">This Month</button>
+      <button class="option-btn" (click)="selectCustomRange()">Custom Range</button>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="right-panel">
+      <mat-calendar
+        [(selected)]="selectedDate"
+        (selectedChange)="onDateSelected($event)"
+        [minDate]="minDate"
+        [maxDate]="maxDate">
+      </mat-calendar>
+    </div>
+  </div>
+
+  <div class="date-picker-footer">
+    <cvp-secondary-button
+      label="Cancel"
+      (buttonClick)="onCancel()">
+    </cvp-secondary-button>
+    <cvp-primary-button
+      label="OK"
+      (buttonClick)="onOk()">
+    </cvp-primary-button>
+  </div>
+</div> 
