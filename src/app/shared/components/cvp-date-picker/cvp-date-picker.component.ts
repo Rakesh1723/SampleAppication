@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, OnInit, ChangeDetectorRef, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit, ChangeDetectorRef, OnChanges, SimpleChanges, ElementRef, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -41,7 +41,7 @@ export class CvpDatePickerComponent implements OnInit, OnChanges {
   // Force calendar rebuild
   showCalendar = true;
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  constructor(private cdr: ChangeDetectorRef, private elementRef: ElementRef) {}
 
   ngOnInit() {
     this.initializeDates();
@@ -76,7 +76,15 @@ export class CvpDatePickerComponent implements OnInit, OnChanges {
     this.showDatePicker = !this.showDatePicker;
     if (this.showDatePicker) {
       this.updateHighlightedDates();
-      this.calendarViewDate = this.selectedDate || new Date();
+      if (this.selectedOption === 'Custom' && this.startDate) {
+        this.calendarViewDate = new Date(this.startDate);
+        this.currentMonth = this.calendarViewDate.getMonth();
+        this.currentYear = this.calendarViewDate.getFullYear();
+      } else {
+        this.calendarViewDate = this.selectedDate || new Date();
+        this.currentMonth = this.calendarViewDate.getMonth();
+        this.currentYear = this.calendarViewDate.getFullYear();
+      }
       this.rebuildCalendar();
     }
   }
@@ -114,7 +122,6 @@ export class CvpDatePickerComponent implements OnInit, OnChanges {
   updateHighlightedDates(): void {
     this.highlightedDates = [];
     this.dateRange = [];
-    
     switch (this.selectedOption) {
       case 'Today':
         const today = new Date();
@@ -124,7 +131,6 @@ export class CvpDatePickerComponent implements OnInit, OnChanges {
         this.currentMonth = today.getMonth();
         this.currentYear = today.getFullYear();
         break;
-        
       case 'Yesterday':
         const yesterday = new Date();
         yesterday.setDate(yesterday.getDate() - 1);
@@ -134,12 +140,10 @@ export class CvpDatePickerComponent implements OnInit, OnChanges {
         this.currentMonth = yesterday.getMonth();
         this.currentYear = yesterday.getFullYear();
         break;
-        
       case 'This Week':
         const weekStart = new Date();
         weekStart.setDate(weekStart.getDate() - weekStart.getDay());
         const weekEnd = new Date();
-        
         this.dateRange = [];
         for (let d = new Date(weekStart); d <= weekEnd; d.setDate(d.getDate() + 1)) {
           this.dateRange.push(new Date(d));
@@ -149,11 +153,9 @@ export class CvpDatePickerComponent implements OnInit, OnChanges {
         this.currentMonth = weekStart.getMonth();
         this.currentYear = weekStart.getFullYear();
         break;
-        
       case 'This Month':
         const monthStart = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), 1);
         const monthEnd = new Date();
-        
         this.dateRange = [];
         for (let d = new Date(monthStart); d <= monthEnd; d.setDate(d.getDate() + 1)) {
           this.dateRange.push(new Date(d));
@@ -162,6 +164,22 @@ export class CvpDatePickerComponent implements OnInit, OnChanges {
         this.calendarViewDate = monthStart;
         this.currentMonth = monthStart.getMonth();
         this.currentYear = monthStart.getFullYear();
+        break;
+      case 'Custom':
+        if (this.startDate && this.endDate) {
+          this.highlightedDates = [this.startDate, this.endDate];
+          this.dateRange = [];
+          for (
+            let d = new Date(this.startDate);
+            d <= this.endDate;
+            d.setDate(d.getDate() + 1)
+          ) {
+            this.dateRange.push(new Date(d));
+          }
+        } else if (this.startDate) {
+          this.highlightedDates = [this.startDate];
+          this.dateRange = [this.startDate];
+        }
         break;
     }
   }
@@ -183,10 +201,24 @@ export class CvpDatePickerComponent implements OnInit, OnChanges {
   }
 
   getDateClass = (date: Date): string => {
-    if (this.isDateHighlighted(date)) {
-      if (this.isDateRangeEnd(date)) {
-        return 'highlighted-range-end';
-      }
+    const isInRange = this.isDateHighlighted(date);
+    const isRangeEnd = this.isDateRangeEnd(date);
+
+    // Check if this date is today
+    const today = new Date();
+    const isToday =
+      date.getDate() === today.getDate() &&
+      date.getMonth() === today.getMonth() &&
+      date.getFullYear() === today.getFullYear();
+
+    if (isInRange && isRangeEnd) {
+      return 'highlighted-range-end';
+    }
+    if (isInRange) {
+      return 'highlighted-range';
+    }
+    if (isToday) {
+      // Use the same class as highlighted-range
       return 'highlighted-range';
     }
     return '';
@@ -256,23 +288,65 @@ export class CvpDatePickerComponent implements OnInit, OnChanges {
   }
 
   selectCustomRange(): void {
-    this.showCustomRange = true;
     this.selectedOption = 'Custom';
+    this.showCustomRange = true;
+    this.startDate = null;
+    this.endDate = null;
     this.highlightedDates = [];
     this.dateRange = [];
+    const today = new Date();
+    this.calendarViewDate = today;
+    this.currentMonth = today.getMonth();
+    this.currentYear = today.getFullYear();
     this.rebuildCalendar();
   }
 
   onDateSelected(date: Date | null): void {
-    if (date && date >= this.minDate && date <= this.maxDate) {
-      this.selectedDate = date;
-      this.selectedOption = '';
-      this.highlightedDates = [date];
-      this.dateRange = [date];
-      this.calendarViewDate = date;
-      this.selectedDateChange.emit(date);
-      this.dateSelected.emit(date);
+    if (!date) return;
+
+    if (this.selectedOption === 'Custom') {
+      if (!this.startDate) {
+        // First selection - set as start date
+        this.startDate = new Date(date);
+        this.endDate = null;
+        this.highlightedDates = [new Date(date)];
+        this.dateRange = [new Date(date)];
+      } else if (!this.endDate) {
+        // Second selection - validate and set as end date
+        if (date < this.startDate) {
+          // If selected date is before start date, make it the new start date
+          this.startDate = new Date(date);
+          this.highlightedDates = [new Date(date)];
+          this.dateRange = [new Date(date)];
+        } else {
+          // Valid end date - set the range
+          this.endDate = new Date(date);
+          this.highlightedDates = [new Date(this.startDate), new Date(this.endDate)];
+          
+          // Generate all dates in range
+          this.dateRange = [];
+          for (let d = new Date(this.startDate); d <= this.endDate; d.setDate(d.getDate() + 1)) {
+            this.dateRange.push(new Date(d));
+          }
+        }
+      } else {
+        // Third or subsequent selection - start new range
+        this.startDate = new Date(date);
+        this.endDate = null;
+        this.highlightedDates = [new Date(date)];
+        this.dateRange = [new Date(date)];
+      }
+
+      // Always keep calendar view at today's date
+      const today = new Date();
+      this.calendarViewDate = today;
+      this.currentMonth = today.getMonth();
+      this.currentYear = today.getFullYear();
       this.rebuildCalendar();
+    } else {
+      this.selectedDate = date;
+      this.updateHighlightedDates();
+      this.selectedDateChange.emit(date);
     }
   }
 
@@ -281,16 +355,38 @@ export class CvpDatePickerComponent implements OnInit, OnChanges {
     this.cancel.emit();
   }
 
+  getDisplayText(): string {
+    if (this.selectedOption === 'Custom') {
+      if (this.startDate && this.endDate) {
+        // Check if start and end dates are the same
+        if (this.startDate.getDate() === this.endDate.getDate() && 
+            this.startDate.getMonth() === this.endDate.getMonth() && 
+            this.startDate.getFullYear() === this.endDate.getFullYear()) {
+          return this.startDate.toLocaleDateString();
+        }
+        return `${this.startDate.toLocaleDateString()} - ${this.endDate.toLocaleDateString()}`;
+      } else if (this.startDate) {
+        return this.startDate.toLocaleDateString();
+      }
+    }
+    return this.selectedOption || (this.selectedDate ? this.selectedDate.toLocaleDateString() : 'Select Date');
+  }
+
   onOk(): void {
-    this.showDatePicker = false;
-    if (this.showCustomRange && this.startDate && this.endDate) {
+    if (this.selectedOption === 'Custom' && this.startDate) {
       this.selectedDate = this.startDate;
       this.selectedDateChange.emit(this.startDate);
       this.dateSelected.emit(this.startDate);
+      // Reset calendar view to today after confirming
+      const today = new Date();
+      this.calendarViewDate = today;
+      this.currentMonth = today.getMonth();
+      this.currentYear = today.getFullYear();
     } else if (this.selectedDate) {
       this.selectedDateChange.emit(this.selectedDate);
       this.dateSelected.emit(this.selectedDate);
     }
+    this.showDatePicker = false;
   }
 
   // Rebuild calendar by toggling its visibility
@@ -314,5 +410,17 @@ export class CvpDatePickerComponent implements OnInit, OnChanges {
   // Set max date to current date
   get maxDate(): Date {
     return new Date();
+  }
+
+  @HostListener('document:mousedown', ['$event'])
+  onDocumentClick(event: MouseEvent): void {
+    if (
+      this.showDatePicker &&
+      (this.selectedOption === 'Today' || !this.selectedOption || this.selectedOption === '') &&
+      !this.elementRef.nativeElement.contains(event.target)
+    ) {
+      this.showDatePicker = false;
+      this.cdr.detectChanges();
+    }
   }
 }

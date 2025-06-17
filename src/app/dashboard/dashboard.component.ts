@@ -19,7 +19,6 @@ import { Router } from '@angular/router';
     CvpTransactionSummaryCardComponent,
     CvpPrimaryButtonComponent,
     CvpSecondaryButtonComponent,
-    CvpConfirmationDialogComponent,
     CvpDatePickerComponent
   ],
   templateUrl: './dashboard.component.html',

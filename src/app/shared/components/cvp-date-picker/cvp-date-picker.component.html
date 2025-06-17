@@ -57,7 +57,7 @@
 
 <div class="date-picker-wrapper">
   <button class="date-picker-trigger" (click)="toggleDatePicker()">
-    {{ selectedOption || (selectedDate ? (selectedDate | date:'mediumDate') : 'Select Date') }}
+    {{ getDisplayText() }}
     <i class="material-icons">calendar_month</i>
   </button>
   
@@ -67,10 +67,10 @@
         {{ currentMonthName }} {{ currentYear }}
       </div>
       <div class="navigation">
-        <button class="nav-btn" (click)="previousMonth()">
+        <button class="nav-btn" (click)="previousMonth()" [disabled]="selectedOption !== 'Custom'">
           <i class="material-icons">chevron_left</i>
         </button>
-        <button class="nav-btn" (click)="nextMonth()">
+        <button class="nav-btn" (click)="nextMonth()" [disabled]="selectedOption !== 'Custom'">
           <i class="material-icons">chevron_right</i>
         </button>
       </div>
