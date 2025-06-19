@@ -373,19 +373,84 @@ export class CvpDatePickerComponent implements OnInit, OnChanges {
   }
 
   onOk(): void {
-    if (this.selectedOption === 'Custom' && this.startDate) {
-      this.selectedDate = this.startDate;
-      this.selectedDateChange.emit(this.startDate);
-      this.dateSelected.emit(this.startDate);
-      // Reset calendar view to today after confirming
-      const today = new Date();
-      this.calendarViewDate = today;
-      this.currentMonth = today.getMonth();
-      this.currentYear = today.getFullYear();
+    const now = new Date();
+    let result: any = {};
+
+    if (this.selectedOption === 'Today') {
+      // Today with current time in UTC
+      const todayUTC = new Date(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours(), now.getMinutes(), now.getSeconds(), now.getMilliseconds()));
+      result = { type: 'today', date: todayUTC.toISOString() };
+      console.log('Selected Today (UTC):', result.date);
+      this.selectedDateChange.emit(todayUTC);
+      this.dateSelected.emit(todayUTC);
+
+    } else if (this.selectedOption === 'Yesterday') {
+      // Yesterday 00:00:00 to 23:59:59 UTC
+      const y = new Date(now);
+      y.setDate(y.getDate() - 1);
+      const start = new Date(Date.UTC(y.getFullYear(), y.getMonth(), y.getDate(), 0, 0, 0, 0));
+      const end = new Date(Date.UTC(y.getFullYear(), y.getMonth(), y.getDate(), 23, 59, 59, 999));
+      result = { type: 'yesterday', start: start.toISOString(), end: end.toISOString() };
+      console.log('Selected Yesterday (UTC):', result.start, 'to', result.end);
+      this.selectedDateChange.emit(start);
+      this.dateSelected.emit(start);
+
+    } else if (this.selectedOption === 'This Week') {
+      // Start of week 00:00:00 UTC, today with current time UTC
+      const today = new Date(now);
+      const start = new Date(today);
+      start.setDate(today.getDate() - today.getDay());
+      const startUTC = new Date(Date.UTC(start.getFullYear(), start.getMonth(), start.getDate(), 0, 0, 0, 0));
+      const endUTC = new Date(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours(), now.getMinutes(), now.getSeconds(), now.getMilliseconds()));
+      result = { type: 'week', start: startUTC.toISOString(), end: endUTC.toISOString() };
+      console.log('Selected This Week (UTC):', result.start, 'to', result.end);
+      this.selectedDateChange.emit(startUTC);
+      this.dateSelected.emit(startUTC);
+
+    } else if (this.selectedOption === 'This Month') {
+      // Start of month 00:00:00 UTC, today with current time UTC
+      const today = new Date(now);
+      const startUTC = new Date(Date.UTC(today.getFullYear(), today.getMonth(), 1, 0, 0, 0, 0));
+      const endUTC = new Date(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours(), now.getMinutes(), now.getSeconds(), now.getMilliseconds()));
+      result = { type: 'month', start: startUTC.toISOString(), end: endUTC.toISOString() };
+      console.log('Selected This Month (UTC):', result.start, 'to', result.end);
+      this.selectedDateChange.emit(startUTC);
+      this.dateSelected.emit(startUTC);
+
+    } else if (this.selectedOption === 'Custom' && this.startDate) {
+      // Custom: start 00:00:00 UTC, end 23:59:59 UTC (or now if today)
+      const start = new Date(this.startDate);
+      const startUTC = new Date(Date.UTC(start.getFullYear(), start.getMonth(), start.getDate(), 0, 0, 0, 0));
+      let endUTC: Date;
+      if (this.endDate) {
+        const end = new Date(this.endDate);
+        if (
+          end.getDate() === now.getDate() &&
+          end.getMonth() === now.getMonth() &&
+          end.getFullYear() === now.getFullYear()
+        ) {
+          endUTC = new Date(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours(), now.getMinutes(), now.getSeconds(), now.getMilliseconds()));
+        } else {
+          endUTC = new Date(Date.UTC(end.getFullYear(), end.getMonth(), end.getDate(), 23, 59, 59, 999));
+        }
+      } else {
+        endUTC = startUTC;
+      }
+      result = { type: 'custom', start: startUTC.toISOString(), end: endUTC.toISOString() };
+      console.log('Selected Custom (UTC):', result.start, 'to', result.end);
+      this.selectedDateChange.emit(startUTC);
+      this.dateSelected.emit(startUTC);
+
     } else if (this.selectedDate) {
-      this.selectedDateChange.emit(this.selectedDate);
-      this.dateSelected.emit(this.selectedDate);
+      // Fallback: just emit selectedDate in UTC
+      const d = this.selectedDate;
+      const dUTC = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate(), d.getHours(), d.getMinutes(), d.getSeconds(), d.getMilliseconds()));
+      result = { type: 'single', date: dUTC.toISOString() };
+      console.log('Selected Date (UTC):', result.date);
+      this.selectedDateChange.emit(dUTC);
+      this.dateSelected.emit(dUTC);
     }
+
     this.showDatePicker = false;
   }
 

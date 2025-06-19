@@ -1,302 +1,5 @@
 @use "../../styles/variables" as *;
 
-// .date-picker-wrapper {
-//   position: relative;
-//   display: inline-block;
-// }
-
-// .date-picker-trigger {
-//   display: flex;
-//   align-items: center;
-//   justify-content: space-between;
-//   gap: 8px;
-//   padding: 8px 16px;
-//   border: 1px solid #ccc;
-//   border-radius: 4px;
-//   background: white;
-//   cursor: pointer;
-//   font-size: 14px;
-//   color: #333;
-//   width: 200px;
-//   white-space: nowrap;
-//   overflow: hidden;
-//   text-overflow: ellipsis;
-
-//   &:hover {
-//     background-color: $color-nordic;
-//     color: #f5f5f5;
-//   }
-
-//   i {
-//     font-size: 20px;
-//     flex-shrink: 0;
-//   }
-// }
-
-// .date-picker-container {
-//   position: absolute;
-//   top: 100%;
-//   left: 0;
-//   margin-top: 8px;
-//   background: white;
-//   border: 1px solid #ccc;
-//   border-radius: 4px;
-//   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-//   z-index: 1000;
-//   min-width: 300px;
-// }
-
-// .date-picker-header {
-//   display: flex;
-//   justify-content: space-between;
-//   align-items: center;
-//   padding: 6px 12px;
-//   border-bottom: 1px solid #e0e0e0;
-
-//   .month-year {
-//     font-size: 14px;
-//     font-weight: 500;
-//     color: #333;
-//   }
-
-//   .navigation {
-//     display: flex;
-//     gap: 2px;
-
-//     .nav-btn {
-//       background: none;
-//       border: none;
-//       cursor: pointer;
-//       padding: 2px;
-//       border-radius: 3px;
-//       display: flex;
-//       align-items: center;
-//       justify-content: center;
-//       color: #666;
-
-//       &:hover {
-//         background-color: #f5f5f5;
-//       }
-
-//       i {
-//         font-size: 18px;
-//       }
-//     }
-//   }
-// }
-
-// .date-picker-content {
-//   display: flex;
-//   min-height: 220px;
-
-//   .left-panel {
-//     width: 33.33%;
-//     padding: 6px;
-//     display: flex;
-//     flex-direction: column;
-//     gap: 2px;
-
-//     .option-btn {
-//       padding: 4px 8px;
-//       border: none;
-//       background: none;
-//       text-align: left;
-//       cursor: pointer;
-//       border-radius: 3px;
-//       color: #333;
-//       font-size: 12px;
-
-//       &:hover {
-//         background-color:#f5f5f5
-//       }
-
-//       &.selected {
-//         background-color: $color-nordic;
-//         color: white;
-//       }
-//     }
-//   }
-
-//   .divider {
-//     width: 1px;
-//     background-color: #e0e0e0;
-//     margin: 6px 0;
-//   }
-
-//   .right-panel {
-//     width: 66.67%;
-//     padding: 6px;
-
-//     ::ng-deep {
-//       .mat-calendar {
-//         width: 100%;
-//       }
-
-//       .mat-calendar-body-cell {
-//         padding: 1px;
-//       }
-
-//       .mat-calendar-body-cell-content {
-//         width: 22px;
-//         height: 22px;
-//         line-height: 22px;
-//         font-size: 11px;
-//         border-radius: 0 !important;
-//         background-color: transparent;
-//         color: $text-primary;
-//         border: 1px solid transparent;
-//         transition: $transition-base;
-
-//         &:hover {
-//           background-color: rgba($color-nordic, 0.1);
-//           border-color: $color-nordic;
-//         }
-//       }
-
-//       .mat-calendar-body-active {
-//         .mat-calendar-body-cell-content {
-//           background-color: $color-nordic !important;
-//           color: $color-white !important;
-//           border-color: $color-nordic;
-//         }
-//       }
-
-//       .mat-calendar-body-selected {
-//         .mat-calendar-body-cell-content {
-//           background-color: $color-nordic !important;
-//           color: $color-white !important;
-//           border-color: $color-nordic;
-//         }
-//       }
-
-//       .mat-calendar-body-today {
-//         .mat-calendar-body-cell-content {
-//           border-color: $color-nordic;
-//           color: $color-nordic;
-//           font-weight: 500;
-//         }
-//       }
-
-//       // Hide the month/year display in calendar header
-//       .mat-calendar-header {
-//         padding: 0;
-//         min-height: 0;
-//       }
-
-//       .mat-calendar-controls {
-//         display: none;
-//       }
-
-//       .mat-calendar-table-header {
-//         padding-top: 4px;
-//       }
-
-//       // Hide the month display below dates
-//       .mat-calendar-body-label {
-//         display: none;
-//       }
-
-//       // Adjust spacing after removing month display
-//       .mat-calendar-body {
-//         padding-top: 0;
-//       }
-
-//       // Reduce size of weekday labels
-//       .mat-calendar-table-header th {
-//         padding: 0;
-//         font-size: 11px;
-//         font-weight: 500;
-//         color: #666;
-//         height: 20px;
-//       }
-
-//       // Reduce calendar table spacing
-//       .mat-calendar-table {
-//         border-spacing: 0;
-//         border-collapse: collapse;
-//       }
-
-//       // Adjust calendar body padding
-//       .mat-calendar-body-cell {
-//         padding: 0;
-//       }
-
-//       .mat-calendar-body-in-range {
-//         &::before {
-//           background-color: rgba($color-nordic, 0.1);
-//         }
-//       }
-
-//       .mat-calendar-body-cell.highlighted {
-//         background-color: $color-nordic;
-//         color: white!important;
-//         border-radius: 0;
-//       }
-
-//       .mat-calendar-body-cell {
-//         &.highlighted {
-//           background-color: $color-nordic;
-//           color: white;
-//           border-radius: 0;
-//         }
-
-//         &.highlighted-range {
-//           background-color: rgba($color-nordic, 0.2);
-//           border-radius: 0;
-//         }
-
-//         &.highlighted-range-end {
-//           background-color: $color-nordic;
-//           color: white !important;
-//           border-radius: 0;
-//         }
-//       }
-
-//       // Keep text color visible for end date
-//       .mat-calendar-body-cell.highlighted-range-end {
-//         .mat-calendar-body-cell-content {
-//           color: white;
-//         }
-//       }
-
-//       // Ensure other dates in range don't have white text
-//       .mat-calendar-body-cell.highlighted-range:not(.highlighted-range-end) {
-//         .mat-calendar-body-cell-content {
-//           color: rgba(0, 0, 0, 0.87);
-//         }
-//       }
-//     }
-//   }
-// }
-
-// .date-picker-footer {
-//   display: flex;
-//   justify-content: flex-end;
-//   gap: 6px;
-//   padding: 6px 12px;
-//   border-top: 1px solid #e0e0e0;
-// }
-
-// // Custom range styles
-// .custom-range {
-//   padding: 16px;
-//   display: flex;
-//   flex-direction: column;
-//   gap: 16px;
-
-//   .range-inputs {
-//     display: flex;
-//     gap: 16px;
-
-//     .date-input {
-//       flex: 1;
-//     }
-//   }
-// } 
-//////////////////
-
-@use "../../styles/variables" as *;
-
 .date-picker-wrapper {
   position: relative;
   display: inline-block;
@@ -472,21 +175,21 @@
         display: none;
       }
 
-      .mat-calendar-table-header {
-        padding-top: 4px;
+      // .mat-calendar-table-header {
+      //   padding-top: 4px;
 
-        th {
-          padding: 0;
-          font-size: 11px;
-          font-weight: 500;
-          color: #666;
-          height: 20px;
-        }
-      }
+      //   th {
+      //     padding: 0;
+      //     font-size: 11px;
+      //     font-weight: 500;
+      //     color: #666;
+      //     height: 20px;
+      //   }
+      // }
 
-      .mat-calendar-body-label {
-        display: none;
-      }
+      // .mat-calendar-body-label {
+      //   display: table-row;
+      // }
 
       .mat-calendar-body {
         padding-top: 0;
@@ -523,6 +226,14 @@
       ::ng-deep .mat-calendar-body-cell.highlighted-range-end .mat-calendar-body-cell-content {
         background-color: $color-nordic !important;
         color: white !important;
+      }
+
+      .mat-calendar-body-disabled {
+        color: #ccc !important;
+        background: #f5f5f5 !important;
+        cursor: not-allowed !important;
+        pointer-events: none;
+        opacity: 0.7;
       }
     }
   }
